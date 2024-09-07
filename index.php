@@ -4,10 +4,10 @@ const DAY_OFF_INTERVAL = 2;
 
 function makeSchedule(int $year, int $month, int $countMonths): void
 {
-    $dayOffDaysCounter = -1;
+    $dayOffCounter = -1;
     $workDayCounter = -1;
 
-    $makeScheduleMonth = function (int $year, int $month) use (&$dayOffDaysCounter, &$workDayCounter): string
+    $makeScheduleMonth = function (int $year, int $month) use (&$dayOffCounter, &$workDayCounter): string
     {
         $schedule = "";
         $daysCount = date("t",
@@ -16,14 +16,14 @@ function makeSchedule(int $year, int $month, int $countMonths): void
             if (isWeekend($day, $month, $year)) {
                 // праздник
                 $schedule .= getStyledString($day, $month, $year, true);
-            } else if ($workDayCounter == -1 || $dayOffDaysCounter >= DAY_OFF_INTERVAL) {
+            } else if ($workDayCounter == -1 || $dayOffCounter >= DAY_OFF_INTERVAL) {
                 // раб день
                 ++$workDayCounter;
-                $dayOffDaysCounter = 0;
+                $dayOffCounter = 0;
                 $schedule .= getStyledString($day, $month, $year, false);
             } else {
                 // выходной
-                $dayOffDaysCounter++;
+                $dayOffCounter++;
                 $workDayCounter = 0;
                 $schedule .= getStyledString($day, $month, $year, true);
             }
