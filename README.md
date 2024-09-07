@@ -1,3 +1,3 @@
-# PHP Func
+# PHP Date
 
 [index.php](./index.php)
